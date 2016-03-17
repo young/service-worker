@@ -1,3 +1,6 @@
+// importScripts('socket.io.js');
+
+
 this.addEventListener('install', (event) => {
 
   event.waitUntil(
@@ -19,3 +22,18 @@ this.addEventListener('fetch', (event) => {
       })
   );
 });
+
+
+  ws = new WebSocket("ws://localhost:8082");
+  ws.onopen = function() {
+    // the socket is open
+    ws.send("foo");
+  };
+  ws.onmessage = function (evt){ 
+    // message received
+    console.log(evt.data);
+  };
+  ws.onclose = function() { 
+    // websocket is closed.
+  };
+
