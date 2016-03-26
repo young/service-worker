@@ -1,0 +1,24 @@
+{
+  "name": "service-worker",
+  "version": "1.0.0",
+  "description": "Service Worker Repo",
+  "main": "app.js",
+  "dependencies": {
+    "restify": "^4.0.4",
+    "ws": "^1.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/young/service-worker.git"
+  },
+  "author": "Jem Young",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/young/service-worker/issues"
+  },
+  "homepage": "https://github.com/young/service-worker#readme"
+}
