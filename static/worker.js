@@ -2,7 +2,6 @@
 
 
 this.addEventListener('install', (event) => {
-
   event.waitUntil(
     caches.open('v1')
       .then((cache) => {
@@ -11,8 +10,11 @@ this.addEventListener('install', (event) => {
         ]);
       })
       .then(()=>{ console.log('service worker installed')})
+      .then(()=> self.skipWaiting())
   );
 });
+
+this.addEventListener('activate',  () => self.clients.claim());
 
 this.addEventListener('fetch', (event) => {
   event.respondWith(
@@ -29,11 +31,12 @@ this.addEventListener('fetch', (event) => {
     // the socket is open
     ws.send("foo");
   };
-  ws.onmessage = function (evt){ 
+  ws.onmessage = function (evt){
     // message received
     console.log(evt.data);
   };
-  ws.onclose = function() { 
+  ws.onclose = function(e) {
     // websocket is closed.
+    console.log('closed for', e);
   };
 
