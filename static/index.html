@@ -8,7 +8,7 @@
 
 <script type="text/javascript">
     if('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('./worker.js', {scope: './'})
+      navigator.serviceWorker.register('./babel-worker.js', {scope: './'})
         .then((reg) => {
           console.log(`success! Scope is ${reg.scope}`);
         })
@@ -16,6 +16,18 @@
           console.log(`Error: ${error}`);
         });
     }
+</script>
+<script type="text/javascript">
+  fetch('worker.js').then(function(response) {
+    return response.blob();
+  }).then(function(response) {
+    const reader = new FileReader();
+    reader.onload = ({target: {result}}) => {
+      debugger;
+    };
+    reader.readAsText(response);
+  });
 
 </script>
+
 </html>

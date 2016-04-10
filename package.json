@@ -4,6 +4,7 @@
   "description": "Service Worker Repo",
   "main": "app.js",
   "dependencies": {
+    "babel-standalone": "^6.7.4",
     "restify": "^4.0.4",
     "ws": "^1.0.1"
   },
