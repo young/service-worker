@@ -10,37 +10,32 @@ const isRequestJS = (request) => {
 
   return false;
 }
-// this.oninstall =  (event) => {
-//   event.waitUntil(
-//     caches.open('v1')
-//       .then((cache) => {
-//         return cache.addAll([
-//           '/index.html'
-//         ]);
-//       })
-//       .then(()=>{ console.log('service worker installed')})
-//       .then(()=> self.skipWaiting())
-//   );
-// };
 
+
+this.oninstall =  () => self.skipWaiting();
 
 this.onactivate = () => self.clients.claim();
 
 this.onfetch = (event) => {
   const isJS = isRequestJS(event.request);
   if (isJS) {
-    return fetch(event.request).then(function(response) {
+   fetch(event.request)
+    .then(function(response) {
       return response.blob();
-    }).then(function(response) {
+    })
+    .then(function(response) {
       const reader = new FileReader();
+
       reader.onload = ({target: {result}}) => {
-        const foo = transform(result);
-        console.log(foo);
-      };
+
+        const res = transform(result);
+        event.respondWith(new Response(res));
+      }
       reader.readAsText(response);
     });
+    return;
   }
 
   // Pass request through
-  return fetch(event.request);
+  event.respondWith(new Response(fetch(event.request)));
 };
