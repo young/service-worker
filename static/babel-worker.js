@@ -17,25 +17,30 @@ this.oninstall =  () => self.skipWaiting();
 this.onactivate = () => self.clients.claim();
 
 this.onfetch = (event) => {
-  // const isJS = isRequestJS(event.request);
-  // if (isJS) {
-  //  return fetch(event.request)
-  //   .then(function(response) {
-  //     return response.blob();
-  //   })
-  //   .then(function(response) {
-  //     const reader = new FileReader();
+  const isJS = isRequestJS(event.request);
+  if (isJS) {
+   event.waitUntil(fetch(event.request)
+    .then(response => response.blob())
+    .then((response) => {
+      const reader = new FileReader();
+      const p = Promise.resolve(true);
+      reader.onload = ({target: {result}}) => {
+        const res = transform(result);
+        p.then(() =>{
+          return res;
+        }) 
+      }
+      debugger;
+      reader.readAsText(response);
+      return p;
+    })
+    .then(res => new Response(res))
+    )
 
-  //     reader.onload = ({target: {result}}) => {
+  } else {
+    // Pass request through
+    event.respondWith(fetch(event.request).then(response => response));
+  }
 
-  //       const res = transform(result);
-  //       event.respondWith(new Response(res));
-  //     }
-  //     reader.readAsText(response);
-  //   });
 
-  // }
-
-  // Pass request through
-  event.respondWith(fetch(event.request).then(response => response));
 };
