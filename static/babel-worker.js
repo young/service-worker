@@ -19,18 +19,17 @@ this.onactivate = () => self.clients.claim();
 this.onfetch = (event) => {
   const isJS = isRequestJS(event.request);
   if (isJS) {
-   event.waitUntil(fetch(event.request)
+   event.respondWith(fetch(event.request)
     .then(response => response.blob())
     .then((response) => {
       const reader = new FileReader();
-      const p = Promise.resolve(true);
-      reader.onload = ({target: {result}}) => {
-        const res = transform(result);
-        p.then(() =>{
-          return res;
-        }) 
-      }
-      debugger;
+      const p = new Promise((resolve, reject) => {
+        // TODO - handle reject
+        reader.onload = ({target: {result}}) => {
+          const res = transform(result);
+          resolve(res);
+        };
+      });
       reader.readAsText(response);
       return p;
     })
