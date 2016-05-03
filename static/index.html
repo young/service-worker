@@ -1,36 +1,63 @@
 <html>
-<head></head>
-<body>
-    <div class='main-container'>
-        Hello
-    </div>
-</body>
-
-<script type="text/javascript">
-    if('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('./babel-worker.js', {scope: './'})
-        .then((reg) => {
-          console.log(`success! Scope is ${reg.scope}`);
-        })
-        .catch((error) => {
-          console.log(`Error: ${error}`);
-        });
+<head>
+  <style>
+    button {
+      position: absolute;
+      top: 700px;
+      left: 0;
+      background: red;
+      font-size: 22px;
+      border-radius: 8px;
+      outline: none;
     }
-</script>
-<script type="text/javascript">
-  setTimeout(()=> {
-    fetch('worker.js').then(function(response) {
-      return response.blob();
-    }).then(function(response) {
-      const reader = new FileReader();
-      reader.onload = ({target: {result}}) => {
-        debugger;
-      };
-      reader.readAsText(response);
-    });
-  }, 5000)
+    img {
+      max-height: 650px;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div class='main-container'>
+    <img />
 
+    <button onclick='buttonClickHandler()'>
+      Gimme cats!
+    </button>
+  </div>
 
-</script>
+  <script type='text/javascript'>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('./socket-worker.js', {scope: './'});
+      }
+  </script>
+  <script type='text/javascript'>
+    // setTimeout(()=> {
+    //   fetch('worker.js').then(function(response) {
+    //     return response.blob();
+    //   }).then(function(response) {
+    //     const reader = new FileReader();
+    //     reader.onload = ({target: {result}}) => {
+    //       debugger;
+    //     };
+    //     reader.readAsText(response);
+    //   });
+    // }, 5000)
+  </script>
+  <script type='text/javascript'>
+    const img = document.querySelector('img');
+
+    const buttonClickHandler = () => {
+      const rand = Math.floor(Math.random() * 4) + 1;
+      fetch(`images/cat${rand}.jpg`)
+      .then(function(response) {
+        return response.blob();
+      })
+      .then(function(blob) {
+        img.src = URL.createObjectURL(blob);
+      });
+    };
+
+  </script>
+</body>
 
 </html>
