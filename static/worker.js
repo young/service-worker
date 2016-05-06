@@ -15,9 +15,6 @@ this.oninstall = (event) => {
   );
 };
 
-
-this.addEventListener('activate',  () => self.clients.claim());
-
 this.onfetch = (event) => {
   const response =
     caches.match(event.request)

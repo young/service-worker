@@ -1,4 +1,5 @@
 importScripts('babel.min.js');
+importScripts('ua-parser.min.js');
 
 /**
  * Transpile a js file into ES5
@@ -21,14 +22,33 @@ const isRequestJS = (request) => {
   return false;
 }
 
+/**
+ * Check if the current browser supports ES6
+ * @return {Boolean}
+ */
+const oldBrowser = () => {
+  const ua = UAParser(navigator.userAgent);
 
-this.oninstall =  () => self.skipWaiting();
+  const goodBrowsers = {
+    'Chrome': '50',
+    'Firefox': '45'
+  };
 
-this.onactivate = () => self.clients.claim();
+  /**
+   * Version browser that can run ES6
+   * @type {Number}
+   */
+  const validVersion = Number(goodBrowsers[ua.browser.name]);
+  if (validVersion && Number(ua.browser.major) >= validVersion) {
+    return false;
+  }
+
+  return true;
+}
 
 this.onfetch = (event) => {
   const isJS = isRequestJS(event.request);
-  if (isJS) {
+  if (isJS && oldBrowser()) {
    event.respondWith(fetch(event.request)
     .then(response => response.blob())
     .then((response) => {
