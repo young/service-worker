@@ -54,7 +54,6 @@ this.onfetch = (event) => {
     .then((response) => {
       const reader = new FileReader();
       const p = new Promise((resolve, reject) => {
-        // TODO - handle reject
         reader.onload = ({target: {result}}) => {
           const res = transform(result);
           resolve(res);
@@ -70,6 +69,4 @@ this.onfetch = (event) => {
     // Pass request through
     event.respondWith(fetch(event.request).then(response => response));
   }
-
-
 };
