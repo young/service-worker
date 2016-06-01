@@ -1,5 +1,6 @@
 {
-  "name": "PWA Demo",
+  "lang": "en",
+  "name": "Progessive Web App Demo",
   "short_name": "PWA Demo",
   "icons": [
   	{
