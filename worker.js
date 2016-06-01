@@ -3,8 +3,8 @@
  * @type {Array}
  */
 const catCache = [
-  '/',
-  '/index.html',
+  '/service-worker/',
+  '/service-worker/index.html',
   '/service-worker/static/images/cat1.jpg',
   '/service-worker/static/images/cat2.jpg',
   '/service-worker/static/images/cat3.jpg',
