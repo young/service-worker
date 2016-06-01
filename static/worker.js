@@ -11,7 +11,8 @@ this.oninstall = (event) => {
           '/service-worker/static/images/cat3.jpg',
           '/service-worker/static/images/cat4.jpg',
         ]);
-      }).then(self.skipWaiting)
+      })
+      // .then(self.skipWaiting)
   );
 };
 
