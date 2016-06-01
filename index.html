@@ -1,6 +1,6 @@
 <html>
 <head>
-	<link rel="manifest" href="/manifest.json">
+  <link rel="manifest" href="/manifest.json">
   <style>
     button {
       position: fixed;
@@ -31,32 +31,30 @@
       }
   </script>
 
-
-  <script type='text/javascript'>
-    // setTimeout(()=> {
-    //   fetch('worker.js').then(function(response) {
-    //     return response.blob();
-    //   }).then(function(response) {
-    //     const reader = new FileReader();
-    //     reader.onload = ({target: {result}}) => {
-    //       debugger;
-    //     };
-    //     reader.readAsText(response);
-    //   });
-    // }, 5000)
-  </script>
   <script type='text/javascript'>
     const img = document.querySelector('img');
 
+    /**
+     * Handle button clicks. Gets a random cat picture!
+     * @void
+     */
     const buttonClickHandler = () => {
+
+      /**
+       * Random number. 0 - 4
+       * @type {Number}
+       */
       const rand = Math.floor(Math.random() * 4) + 1;
+
       fetch(`static/images/cat${rand}.jpg`)
-      .then(function(response) {
-        return response.blob();
-      })
-      .then(function(blob) {
-        img.src = URL.createObjectURL(blob);
-      });
+        .then(function(response) {
+          // Convert to blob
+          return response.blob();
+        })
+        .then(function(blob) {
+          // Insert into object
+          img.src = URL.createObjectURL(blob);
+        });
     };
 
   </script>

@@ -2,7 +2,7 @@
   "name": "PWA Demo",
   "short_name": "PWA Demo",
   "icons": [{
-      "src": "static/images/icons/cat1.png",
+      "src": "logo.png",
       "sizes": "144x144",
       "type": "image/png"
     }
