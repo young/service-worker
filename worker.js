@@ -2,7 +2,7 @@
  * The cache name
  * @type {String}
  */
-const cacheName = 'v3';
+const cacheName = 'v4';
 
 /**
  * Things to cache
