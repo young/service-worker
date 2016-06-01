@@ -15,6 +15,7 @@ const catCache = [
   '/service-worker/static/images/cat2.jpg',
   '/service-worker/static/images/cat3.jpg',
   '/service-worker/static/images/cat4.jpg',
+  '/service-worker/manifest.json'
 ];
 
 this.oninstall = (event) => {
