@@ -1,8 +1,66 @@
 <html>
-  <head>
-    <link rel="manifest" href="/manifest.json">
-  </head>
-  <main>
-    Hello
-  </main>
+<head>
+	<link rel="manifest" href="/manifest.json">
+  <style>
+    button {
+      position: absolute;
+      top: 700px;
+      left: 0;
+      background: red;
+      font-size: 22px;
+      border-radius: 8px;
+      outline: none;
+    }
+    img {
+      max-height: 650px;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div class='main-container'>
+    <img />
+
+    <button onclick='buttonClickHandler()'>
+      Gimme cats!
+    </button>
+  </div>
+
+  <script type='text/javascript'>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('./worker.js');
+      }
+  </script>
+
+
+  <script type='text/javascript'>
+    // setTimeout(()=> {
+    //   fetch('worker.js').then(function(response) {
+    //     return response.blob();
+    //   }).then(function(response) {
+    //     const reader = new FileReader();
+    //     reader.onload = ({target: {result}}) => {
+    //       debugger;
+    //     };
+    //     reader.readAsText(response);
+    //   });
+    // }, 5000)
+  </script>
+  <script type='text/javascript'>
+    const img = document.querySelector('img');
+
+    const buttonClickHandler = () => {
+      const rand = Math.floor(Math.random() * 4) + 1;
+      fetch(`images/cat${rand}.jpg`)
+      .then(function(response) {
+        return response.blob();
+      })
+      .then(function(blob) {
+        img.src = URL.createObjectURL(blob);
+      });
+    };
+
+  </script>
+</body>
+
 </html>
