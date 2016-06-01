@@ -1,4 +1,10 @@
 /**
+ * The cache name
+ * @type {String}
+ */
+const cacheName = 'v3';
+
+/**
  * Things to cache
  * @type {Array}
  */
@@ -13,7 +19,7 @@ const catCache = [
 
 this.oninstall = (event) => {
   event.waitUntil(
-    caches.open('v2')
+    caches.open(cacheName)
       .then((cache) => {
         return cache.addAll(catCache);
       })
@@ -27,7 +33,7 @@ this.onfetch = (event) => {
         fetch(event.request)
           .then((res) => {
             const r = res.clone();
-            caches.open('v2').then((cache) => {
+            caches.open(cacheName).then((cache) => {
               cache.put(event.request, r);
             });
           return res;
