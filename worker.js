@@ -13,7 +13,7 @@ const catCache = [
 
 this.oninstall = (event) => {
   event.waitUntil(
-    caches.open('v1')
+    caches.open('v2')
       .then((cache) => {
         return cache.addAll(catCache);
       })
@@ -27,7 +27,7 @@ this.onfetch = (event) => {
         fetch(event.request)
           .then((res) => {
             const r = res.clone();
-            caches.open('v1').then((cache) => {
+            caches.open('v2').then((cache) => {
               cache.put(event.request, r);
             });
           return res;
