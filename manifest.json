@@ -4,7 +4,7 @@
   "short_name": "PWA Demo",
   "icons": [
   	{
-      "src": "service-worker/logo.png",
+      "src": "logo.png",
       "sizes": "144x144",
       "type": "image/png"
     }
