@@ -6,10 +6,10 @@ this.oninstall = (event) => {
         return cache.addAll([
           '/',
           '/index.html',
-          '/images/cat1.jpg',
-          '/images/cat2.jpg',
-          '/images/cat3.jpg',
-          '/images/cat4.jpg',
+          '/static/service-worker/images/cat1.jpg',
+          '/static/service-worker/images/cat2.jpg',
+          '/static/service-worker/images/cat3.jpg',
+          '/static/service-worker/images/cat4.jpg',
         ]);
       }).then(self.skipWaiting)
   );
