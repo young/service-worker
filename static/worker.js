@@ -1,16 +1,21 @@
+/**
+ * Things to cache
+ * @type {Array}
+ */
+const catCache = [
+  '/',
+  '/index.html',
+  '/service-worker/static/images/cat1.jpg',
+  '/service-worker/static/images/cat2.jpg',
+  '/service-worker/static/images/cat3.jpg',
+  '/service-worker/static/images/cat4.jpg',
+];
 
 this.oninstall = (event) => {
   event.waitUntil(
     caches.open('v1')
       .then((cache) => {
-        return cache.addAll([
-          '/',
-          '/index.html',
-          '/service-worker/static/images/cat1.jpg',
-          '/service-worker/static/images/cat2.jpg',
-          '/service-worker/static/images/cat3.jpg',
-          '/service-worker/static/images/cat4.jpg',
-        ]);
+        return cache.addAll(catCache);
       })
   );
 };
