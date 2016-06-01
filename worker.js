@@ -11,11 +11,12 @@ const cacheName = 'v4';
 const catCache = [
   '/service-worker/',
   '/service-worker/index.html',
+  '/service-worker/manifest.json',
+  '/service-worker/logo.png',
   '/service-worker/static/images/cat1.jpg',
   '/service-worker/static/images/cat2.jpg',
   '/service-worker/static/images/cat3.jpg',
-  '/service-worker/static/images/cat4.jpg',
-  '/service-worker/manifest.json'
+  '/service-worker/static/images/cat4.jpg'
 ];
 
 this.oninstall = (event) => {
