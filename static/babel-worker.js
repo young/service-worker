@@ -2,6 +2,7 @@ importScripts('babel.min.js');
 
 const transform = (input) => Babel.transform(input, { presets: ['es2015'] }).code;
 
+
 const isRequestJS = (request) => {
   if (request && request.url) {
     const url = request.url;
