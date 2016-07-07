@@ -1,0 +1,29 @@
+<html>
+<head>
+</head>
+<body>
+  <div class='main-container'>
+
+  </div>
+
+  <script type='text/javascript'>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/babel-worker/worker.js');
+    }
+  </script>
+  <script type='text/javascript'>
+    navigator.serviceWorker.ready.then((e) => {
+      fetch('/babel-worker/test-file.js').then(function(response) {
+        return response.blob();
+      }).then(function(response) {
+        const reader = new FileReader();
+        reader.onload = ({target: {result}}) => {
+          document.querySelector('.main-container').innerHTML = result;
+        };
+        reader.readAsText(response);
+      });
+    });
+  </script>
+</body>
+
+</html>

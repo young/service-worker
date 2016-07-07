@@ -13,15 +13,16 @@ server.get(/.*/, restify.serveStatic({
 const WebSocketServer = require('ws').Server;
 const wss = new WebSocketServer({ port: 8082 });
 
-console.log('Socket server listening at 8082');
+// console.log('Socket server listening at 8082');
 wss.on('connection', function connection(ws) {
   ws.on('message', function incoming(message) {
-    console.log('received: %s', message);
+    //console.log('received: %s', message);
   });
-
+  let n = 1;
   setInterval(() => {
-    ws.send(`Money made: $${Math.random() * 1000}`, () => {
-      console.log('Socket was closed ')
+    n +=1;
+    ws.send(`${n}`, () => {
+      console.log(`sent ${n}`)
     });
   }, 1000);
 });
