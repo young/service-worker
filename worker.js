@@ -2,7 +2,7 @@
  * The cache name
  * @type {String}
  */
-const cacheName = 'v6';
+const CACHE_NAME = 'v7';
 
 /**
  * Things to cache
@@ -21,7 +21,7 @@ const catCache = [
 
 this.oninstall = (event) => {
   event.waitUntil(
-    caches.open(cacheName)
+    caches.open(CACHE_NAME)
       .then((cache) => {
         return cache.addAll(catCache);
       })
@@ -30,7 +30,8 @@ this.oninstall = (event) => {
 
 this.onfetch = (event) => {
   event.respondWith(
-    caches.match(event.request)
+    caches.open(CACHE_NAME)
+    .then(caches.match(event.request)
       .then(response => {
         if (response) {
           return response;
@@ -46,6 +47,7 @@ this.onfetch = (event) => {
           return res; // Don't wait for the request to cache
           });
       })
+    )
   );
 };
 
