@@ -31,22 +31,26 @@ this.oninstall = (event) => {
 this.onfetch = (event) => {
   event.respondWith(
     caches.open(CACHE_NAME)
-    .then(cache => cache.match(event.request))
-      .then(response => {
-        if (response) {
-          return response;
-        }
+    .then(cache =>
+      cache.match(event.request)
+        .then(response => {
+          if (response) {
+            return response;
+          }
 
-        return fetch(event.request)
-          .then((res) => {
-            caches.open(CACHE_NAME)
-              .then((cache) => {
-                const r = res.clone();
-                cache.put(event.request, r);
-             });
-            return res; // Don't wait for the request to cache
-          });
-      })
+          return fetch(event.request)
+            .then((res) => {
+              caches.open(CACHE_NAME)
+                .then((cache) => {
+                  const r = res.clone();
+                  cache.put(event.request, r);
+                });
+              return res; // Don't wait for the request to cache
+            }
+          );
+        }
+      )
     )
+  )
 };
 
