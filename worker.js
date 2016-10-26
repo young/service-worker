@@ -42,12 +42,11 @@ this.onfetch = (event) => {
             caches.open(CACHE_NAME)
               .then((cache) => {
                 const r = res.clone();
-                cache.put(event.request, r);		
+                cache.put(event.request, r);
              });
             return res; // Don't wait for the request to cache
           });
       })
     )
-  );
 };
 
