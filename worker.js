@@ -31,7 +31,7 @@ this.oninstall = (event) => {
 this.onfetch = (event) => {
   event.respondWith(
     caches.open(CACHE_NAME)
-    .then(caches.match(event.request)
+    .then(cache => cache.match(event.request))
       .then(response => {
         if (response) {
           return response;
@@ -40,10 +40,7 @@ this.onfetch = (event) => {
         return fetch(event.request)
           .then((res) => {
             const r = res.clone();
-            caches.open(CACHE_NAME)
-              .then((cache) => {
-                cache.put(event.request, r);
-            });
+            cache.put(event.request, r);
           return res; // Don't wait for the request to cache
           });
       })
