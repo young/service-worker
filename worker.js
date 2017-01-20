@@ -42,8 +42,8 @@ this.onfetch = (event) => {
             .then((res) => {
               const r = res.clone();
               caches.open(CACHE_NAME)
-                .then((cache) => {
-                  cache.put(event.request, r);
+                .then((c) => {
+                  c.put(event.request, r);
                 });
               return res; // Don't wait for the request to cache
             }
