@@ -19,6 +19,10 @@ const catCache = [
   '/service-worker/static/images/cat4.jpg'
 ];
 
+/**
+ * Handle install event
+ *
+ */
 this.oninstall = (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME)
@@ -28,16 +32,27 @@ this.oninstall = (event) => {
   );
 };
 
+
+/**
+ * Handle fetch event
+ *
+ */
 this.onfetch = (event) => {
   event.respondWith(
     caches.open(CACHE_NAME)
-    .then(cache =>
+    .then((cache) =>
       cache.match(event.request)
         .then(response => {
+          // Cache hit
           if (response) {
             return response;
           }
-
+          
+          // Cache miss
+          // 1. Fetch data
+          // 2. Clone response
+          // 3. Cache response
+          // 4. Return response
           return fetch(event.request)
             .then((res) => {
               const r = res.clone();
