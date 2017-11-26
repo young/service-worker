@@ -8,7 +8,7 @@ const CACHE_NAME = 'v7';
  * Things to cache
  * @type {Array}
  */
-const catCache = [
+const itemsToCache = [
   '/service-worker/',
   '/service-worker/index.html',
   '/service-worker/manifest.json',
@@ -21,13 +21,12 @@ const catCache = [
 
 /**
  * Handle install event
- *
  */
 this.oninstall = (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then((cache) => {
-        return cache.addAll(catCache);
+        return cache.addAll(itemsToCache);
       })
   );
 };
